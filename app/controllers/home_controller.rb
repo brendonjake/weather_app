@@ -1,0 +1,1 @@
+class HomeController < ApplicationController  include ApplicationHelper  def index    @paris = CurrentWeatherService.new("48.8534", "2.3399997").call    @new_york = CurrentWeatherService.new("40.7143", "-74.006").call    @london = CurrentWeatherService.new("51.5085", "-0.1257").call  endend
