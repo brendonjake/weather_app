@@ -1,0 +1,33 @@
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Current Weather</h1>
+
+<%= form_tag({ controller: 'locations', action: 'fetch_weather' }, method: 'post') do %>
+  <p>
+    <%= label_tag :latitude, 'Latitude:' %>
+    <%= text_field_tag :latitude %>
+  </p>
+
+  <p>
+    <%= label_tag :longitude, 'Longitude:' %>
+    <%= text_field_tag :longitude %>
+  </p>
+
+  <p>
+    <%= label_tag :location_name, 'Location Name:' %>
+    <%= text_field_tag :location_name %>
+  </p>
+
+  <%= submit_tag 'Fetch Weather' %>
+<% end %>
+
+<% @locations.each do |location| %>
+  <div>
+    <h1><%= location.name %></h1>
+    <p> Temperature: <%= location.weather_temperature %>&deg;C</p>
+    <p> Weather Code: <%= location.weather_code %> (<%= weather_description(location.weather_code) %>) </p>
+    <p> Current Precipitation Probability Max: <%= location.daily_precipitation_max %>%</p>
+  </div>
+<% end %>
